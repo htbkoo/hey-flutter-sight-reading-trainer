@@ -37,15 +37,16 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
+  final _biggerFont = TextStyle(fontSize: 20.0);
 
   Widget _buildSuggestions() {
     return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(0.0),
         itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider(); /*2*/
+          // if (i.isOdd) return Divider(); /*2*/
 
-          final index = i ~/ 2; /*3*/
+          // final index = i ~/ 2; /*3*/
+          final index = i;
           if (index >= _suggestions.length) {
             _suggestions.addAll(generateWordPairs().take(10)); /*4*/
           }
@@ -54,11 +55,18 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(
+            pair.asPascalCase,
+            style: _biggerFont,
+          ),
+        ),
+        Divider(
+          thickness: 2.0,
+        ),
+      ],
     );
   }
 
